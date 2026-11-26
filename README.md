@@ -145,9 +145,9 @@ The evaluation includes overall classification performance, per-class results, a
 If you use the code, data split configurations, or other resources provided in this repository, please cite the accompanying paper:
 
 ```bibtex
-@article{gomulka2026tennis,
+@article{krzeszowski2026tennis,
   title={Comparative Analysis of Deep Learning Models for Subject-Independent Tennis Stroke Recognition from RGB Videos},
-  author={Gomulka, Kamil and Krzeszowski, Tomasz and Powroznik, Pawel and Skublewska-Paszkowska, Maria},
+  author={Krzeszowski, Tomasz and Gomulka, Kamil and Powroznik, Pawel and Skublewska-Paszkowska, Maria},
   journal={Applied Sciences},
   year={2026}
 }
