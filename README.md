@@ -14,8 +14,7 @@ The repository provides the experimental configurations and supporting code used
 
 ## Dataset
 
-The experiments were conducted using the RGB videos from the publicly available [THETIS (THree dimEnsional TennIs Shots) dataset](LINK_TO_THETIS_DATASET).
-
+The experiments were conducted using the RGB videos from the publicly available [THETIS (THree dimEnsional TennIs Shots) dataset](https://github.com/THETIS-dataset/dataset).
 The dataset contains 1,980 RGB video clips representing twelve tennis stroke categories, performed by 55 subjects (31 amateur and 24 experienced players).
 
 The following twelve classes were considered:
