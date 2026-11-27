@@ -160,3 +160,9 @@ If you use the code, data split configurations, or other resources provided in t
 This work uses the THETIS dataset and builds upon several publicly available deep learning architectures and implementations, including TimeSformer.
 
 We thank the original dataset authors and the developers of the referenced architectures for making their resources available to the research community.
+
+## License
+
+The source code in this repository is distributed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+The THETIS dataset, pretrained model weights, and third-party implementations remain subject to their respective licenses and terms of use.
