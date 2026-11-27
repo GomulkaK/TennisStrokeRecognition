@@ -36,6 +36,87 @@ The following twelve classes were considered:
 
 **Note:** The original THETIS video files are not included in this repository. Please obtain the dataset from its original source and organize the RGB videos according to the paths specified in the provided split files.
 
+After downloading the THETIS dataset from its [original repository](https://github.com/THETIS-dataset/dataset), extract the RGB video files into the `VIDEO_RGB/` directory in the root of this repository. Preserve the original class subdirectory names so that they match the paths specified in the provided split files.
+
+The expected directory structure is:
+
+```text
+repository/
+├── VIDEO_RGB/
+│   ├── backhand/
+│   ├── backhand2hands/
+│   └── ...
+├── labels/
+├── splits/
+└── torchvision_video.py
+```
+
+If the videos are stored in a different location, specify the appropriate directory using the `--data-dir` argument when running the training or evaluation script.
+
+## Installation and Requirements
+
+The experiments were implemented in Python using PyTorch and related computer vision and machine learning libraries. The dependencies required to run the scripts include:
+
+- Python
+- PyTorch
+- Torchvision
+- NumPy
+- Pandas
+- Pillow
+- OpenCV
+- scikit-learn
+- Matplotlib
+- tqdm
+
+The exact PyTorch and Torchvision versions should be selected according to the installed Python version and hardware configuration. For GPU acceleration, install a PyTorch build compatible with the available CUDA version. Refer to the [official PyTorch installation guide](https://pytorch.org/get-started/locally/) for the appropriate installation command.
+
+### Basic environment setup
+
+Create and activate a virtual environment:
+
+```bash
+python -m venv tennis_env
+```
+
+On Windows:
+
+```bash
+tennis_env\Scripts\activate
+```
+
+On Linux:
+
+```bash
+source tennis_env/bin/activate
+```
+
+Install PyTorch and Torchvision using the command recommended by the official PyTorch installation guide. Then install the remaining common dependencies:
+
+```bash
+pip install numpy pandas pillow opencv-python scikit-learn matplotlib tqdm
+```
+
+### Additional dependencies for TimeSformer
+
+The TimeSformer models use the [official TimeSformer implementation](https://github.com/facebookresearch/TimeSformer), which requires additional packages:
+
+```bash
+pip install fvcore simplejson einops timm av psutil tensorboard
+pip install scikit-learn opencv-python
+pip install "git+https://github.com/facebookresearch/fvcore"
+```
+
+The official implementation also requires building and installing the TimeSformer codebase:
+
+```bash
+git clone https://github.com/facebookresearch/TimeSformer
+cd TimeSformer
+python setup.py build develop
+```
+
+Refer to the original repository for further installation details.
+
+**Note:** The TimeSformer implementation is an older, archived codebase. Its dependencies may require a separate Python environment compatible with the original implementation. The other models in this repository use the standard PyTorch and Torchvision libraries.
 ## Data Splits and Class Labels
 
 The repository includes the data split configurations used in the experiments. Three evaluation settings are provided:
@@ -112,6 +193,34 @@ The repository includes training and evaluation code for the following video-bas
 - MViT-v2-S
 
 These models process video clips directly and jointly learn spatial and temporal representations.
+
+#### Training and Evaluation
+
+The `torchvision_video.py` script provides a unified interface for training and evaluating the five torchvision video architectures: R(2+1)D-18, Swin3D-Tiny, Swin3D-Base, MViT-v1-B, and MViT-v2-S.
+
+The script supports both training and evaluation using the provided data splits. The model architecture, evaluation protocol, split configuration, and fold can be selected through command-line arguments.
+
+**Example – training MViT-v2-S using the subject-independent single split:**
+
+```bash
+python train_torchvision_video.py --mode train --model mvit_v2_s --protocol subject_independent --split-mode single_split
+```
+
+**Example – training Swin3D-Tiny using the third fold of subject-independent five-fold cross-validation:**
+
+```bash
+python train_torchvision_video.py --mode train --model swin3d_t --protocol subject_independent --split-mode five_fold --fold 3
+```
+
+**Example – evaluating a previously trained MViT-v2-S checkpoint:**
+
+```bash
+python train_torchvision_video.py --mode test --model mvit_v2_s --protocol subject_independent --split-mode single_split --checkpoint "outputs/mvit_v2_s/subject_independent/single_split/mvitv2s_best.pth"
+```
+
+In evaluation mode, the script loads the specified checkpoint and evaluates it on the corresponding test split without additional training. Training and evaluation results, including checkpoints, training history, classification reports, and confusion matrices, are saved in the `outputs/` directory.
+
+The default video directory is `VIDEO_RGB/` in the repository root. An alternative location can be specified using the `--data-dir` argument.
 
 ### 3. TimeSformer Models
 

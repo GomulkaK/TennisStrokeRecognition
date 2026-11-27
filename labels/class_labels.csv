@@ -1,0 +1,13 @@
+class_id,abbreviation,class_name
+0,BH,Backhand
+1,BH2,Backhand with two hands
+2,BHS,Backhand slice
+3,BHV,Backhand volley
+4,SF,Service flat
+5,FF,Forehand flat
+6,FOS,Forehand open stands
+7,FS,Forehand slice
+8,FV,Forehand volley
+9,SK,Service kick
+10,SS,Service slice
+11,SM,Smash
